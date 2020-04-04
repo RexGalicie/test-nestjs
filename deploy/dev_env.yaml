@@ -1,8 +1,0 @@
- env_variables:
-  NODE_ENV: production
-  PORT: 8080
-  PGSQL_PASSWORD: on6Gt1vthgGL4pKx
-  PGSQL_USERNAME: postgres
-  PGSQL_DATABASE: postgres
-  PGSQL_PORT: 5432
-  PGSQL_INSTANCE_CONNECTION_NAME: slack-bots-pro:europe-west1:slack-bot-news
