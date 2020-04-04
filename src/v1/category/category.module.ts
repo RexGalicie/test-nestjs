@@ -1,19 +1,22 @@
-import { Flasher } from './../../infrastructure/domain/flusher';
-import { Manager } from './../../infrastructure/domain/manager';
-import { CategoryEntity } from './domain/entities/category.entity';
-import { CategoryRepository } from './domain/repositories/category.repository';
-import { CategoryService } from './category.service';
-import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { CategoryController } from './category.controller';
+import { Module } from '@nestjs/common'
+import { MikroOrmModule } from 'nestjs-mikro-orm'
+import { CategoryController } from './category.controller'
+import { Flusher } from '../../infrastructure/domain/flusher'
+import { CategoryEntity } from './domain/entities/category.entity'
+import { CategoryRepository } from './domain/repositories/category.repository'
+import { CategoryService } from './category.service'
 
 @Module({
   providers: [
-    CategoryService,
-    Manager,
-    { provide: 'CategoryRepositoryInterface', useClass: CategoryRepository }
+    Flusher,
+    { provide: 'CategoryServiceInterface', useClass: CategoryService },
+    { provide: 'CategoryRepositoryInterface', useClass: CategoryRepository },
   ],
-  imports: [TypeOrmModule.forFeature([CategoryEntity])],
-  controllers: [CategoryController]
+  imports: [
+    MikroOrmModule.forFeature({
+      entities: [CategoryEntity],
+    }),
+  ],
+  controllers: [CategoryController],
 })
 export class CategoryModule {}

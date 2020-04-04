@@ -1,3 +1,4 @@
 export interface BaseEntityInterface {
-  id: string
+  uuid: string
+  deletedAt: Date
 }

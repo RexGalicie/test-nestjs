@@ -1,32 +1,26 @@
-import { IdTypeInterface } from './id.type.interface';
-import {Exclude} from "class-transformer";
-import { Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from 'typeorm';
-import { BaseEntityInterface } from './base.entity.interface';
-import { IdType } from './id.type';
+import { BaseEntityInterface } from './base.entity.interface'
+import { Exclude } from 'class-transformer'
 
-export class BaseEntity implements BaseEntityInterface {
+import { Property } from 'mikro-orm'
+import { IdInterface } from './id.interface'
 
-  constructor(id: IdTypeInterface) {
-    this.uuid = id
-  }
-
+// base entity prepared for quick chanfes beedwen mongo & pg
+// as what to need just reimplement IdType & implement IdInterface
+export abstract class BaseEntity implements BaseEntityInterface {
   @Exclude()
-  @Column({ type: 'uuid', primary: true, transformer: IdType.transformer })
-  private uuid: IdTypeInterface
+  @Property({ type: 'uuid', primary: true, hidden: true })
+  public uuid: string
 
-  @Exclude()
-  @CreateDateColumn({ name: 'created_at' })
-  protected createdDate: Date
+  @Property({ onCreate: () => new Date() })
+  public createdAt = new Date()
 
-  @Exclude()
-  @UpdateDateColumn({ name: 'updated_at' })
-  protected updatedDate: Date
+  @Property({ onUpdate: () => new Date() })
+  public updatedAt = new Date()
 
-  @Exclude()
-  @DeleteDateColumn({ name: 'deleted_at' })
-  protected deletedDate: Date
+  @Property({ default: null, nullable: true })
+  public deletedAt = new Date()
 
-  public get id(): string {
-    return this.uuid.getValue()
+  constructor(id: IdInterface) {
+    this.uuid = id.getValue()
   }
 }

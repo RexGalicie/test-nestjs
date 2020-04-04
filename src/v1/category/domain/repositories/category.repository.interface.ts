@@ -1,6 +1,9 @@
-import { CategoryInterface } from '../entities/category.entity.interface';
+import { IdInterface } from './../../../../infrastructure/entities/id.interface'
+import { CategoryInterface } from '../entities/category.entity.interface'
 
 export interface CategoryRepositoryInterface {
-  add(category: CategoryInterface): Promise<CategoryInterface>  
+  findAll(): Promise<CategoryInterface[]>
+  getById(id: IdInterface): Promise<CategoryInterface>
+  add(category: CategoryInterface): Promise<void>
   remove(category: CategoryInterface): Promise<void>
 }

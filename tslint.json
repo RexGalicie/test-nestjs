@@ -1,0 +1,21 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint:recommended",
+        "prettier"
+    ],
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 2018,
+        "sourceType": "module",
+        "project": "./tsconfig.json"
+    },
+    "ignorePatterns": ["**/*"],
+    "plugins": ["@typescript-eslint"],
+    "rules": {
+        "no-console": {
+            "severity": "warning"
+          }
+    }
+}

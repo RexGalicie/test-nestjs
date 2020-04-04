@@ -1,30 +1,16 @@
-import { IdTypeInterface } from './id.type.interface';
-import { ValueTransformer } from 'typeorm';
-import { v4 as uuidv4 } from 'uuid';
-import validator from 'validator';
-import { InternalServerErrorException } from '@nestjs/common/exceptions';
+import { Type } from 'mikro-orm'
+import { Id } from './id'
 
-export class IdType implements IdTypeInterface {
-
-  private id: string 
-
-  constructor(id: string) {
-    if(!validator.isUUID(id, '4')) {
-      throw new InternalServerErrorException('ID must be valid UUID string')
-    }
-    this.id = id
+export class IdType extends Type {
+  convertToDatabaseValue(value: any): string {
+    return value instanceof Id ? value.getValue() : value
   }
 
-  public getValue(): string {
-    return this.id
+  convertToJSValue(value: any): any {
+    return value ? new Id(value) : null
   }
 
-  public static generate(): IdTypeInterface {
-    return new this(uuidv4())
-  }
-
-  public static transformer : ValueTransformer = {
-    from: dbValue => new IdType(dbValue),
-    to: (entityValue: IdType) => entityValue.id
+  getColumnType() {
+    return 'uuid'
   }
 }

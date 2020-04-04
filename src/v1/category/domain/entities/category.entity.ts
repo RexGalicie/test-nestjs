@@ -1,21 +1,29 @@
-import { BaseEntity } from '../../../../infrastructure/entities/base.entity';
-import { CategoryInterface } from './category.entity.interface';
-import { Column, Entity } from 'typeorm';
-import { IdTypeInterface } from '../../../../infrastructure/entities/id.type.interface';
+import { Property, Entity, AnyEntity, wrap } from 'mikro-orm'
+import { CategoryInterface } from './category.entity.interface'
+import { IdInterface } from '../../../../infrastructure/entities/id.interface'
+import { BaseEntity } from '../../../../infrastructure/entities/base.entity'
+import { ConflictException } from '@nestjs/common'
 
-@Entity('category')
-export class CategoryEntity extends BaseEntity implements CategoryInterface {
-  @Column()
-  private title: string
+@Entity({ tableName: 'category' })
+export class CategoryEntity extends BaseEntity
+  implements AnyEntity<CategoryEntity>, CategoryInterface {
+  [x: string]: any
 
-  @Column()
-  private active: boolean
+  @Property()
+  title: string
 
-  constructor(id: IdTypeInterface, title: string) {
-    super(id)
+  @Property()
+  active: boolean
+
+  @Property({ default: false })
+  softDeleted = false
+
+  constructor(uuid: IdInterface, title: string, active: boolean = true) {
+    super(uuid)
     this.title = title
-    this.active = true
+    this.active = active
   }
+
   setTitle(title: string): void {
     this.title = title
   }
@@ -23,9 +31,15 @@ export class CategoryEntity extends BaseEntity implements CategoryInterface {
     return this.active
   }
   activate(): void {
+    if (this.isActive()) {
+      throw new ConflictException('Category active')
+    }
     this.active = true
   }
   disactivate(): void {
+    if (!this.isActive()) {
+      throw new ConflictException('Category already deactivated')
+    }
     this.active = false
   }
   getTitle(): string {
