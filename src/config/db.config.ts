@@ -26,7 +26,7 @@ const options: Options = {
     path: process.cwd() + '/migrations', // path to folder with migration files
     pattern: /^[\w-]+\d+\.ts$/, // how to match migration files
     transactional: true, // run each migration inside transaction
-    disableForeignKeys: true, // try to disable foreign_key_checks (or equivalent)
+    disableForeignKeys: false, // try to disable foreign_key_checks (or equivalent)
     allOrNothing: true, // run all migrations in current batch in master transaction
     emit: 'ts', // migration generation mode
   },
