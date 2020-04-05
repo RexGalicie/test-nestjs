@@ -1,6 +1,6 @@
 import { CreateCategoryDtoInterface } from './dto/create/create.category.dto interface'
-import { RemoveCategoryDtoInterface } from './dto/remove/remove.category.dto interface'
 import { GetCategoryDtoInterface } from './dto/get/get.category.dto interface'
+import { RemoveCategoryDtoInterface } from './dto/remove/remove.category.dto interface'
 import { GetCategoryTransformerInterface } from './response/transformers/get.category.interface'
 
 export interface CategoryServiceInterface {

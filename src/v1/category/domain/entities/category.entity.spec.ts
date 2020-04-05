@@ -1,5 +1,5 @@
+import { Id } from '../../../../infrastructure/domain/entities/id'
 import { CategoryEntity } from './category.entity'
-import { Id } from '../../../../infrastructure/entities/id'
 
 describe('News Entity', () => {
   it('should fill fields via constructor', () => {

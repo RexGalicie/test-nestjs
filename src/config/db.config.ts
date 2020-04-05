@@ -1,6 +1,7 @@
 import { Logger } from '@nestjs/common'
 import { Options } from 'mikro-orm'
-import { BaseEntity } from '../infrastructure/entities/base.entity'
+
+import { BaseEntity } from '../infrastructure/domain/entities/base.entity'
 import { CategoryEntity } from '../v1/category/domain/entities/category.entity'
 
 const logger = new Logger('MikroORM')

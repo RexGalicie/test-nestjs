@@ -1,15 +1,16 @@
-import { GetCategoryTransformerInterface } from './response/transformers/get.category.interface'
-import { Injectable, Inject } from '@nestjs/common'
-import { CategoryServiceInterface } from './category.service.interface'
-import { Id } from './../../infrastructure/entities/id'
-import { CategoryRepositoryInterface } from './domain/repositories/category.repository.interface'
-import { CategoryEntity } from './domain/entities/category.entity'
-import { Flusher } from '../../infrastructure/domain/flusher'
-import { CreateCategoryDtoInterface } from './dto/create/create.category.dto interface'
-import { RemoveCategoryDtoInterface } from './dto/remove/remove.category.dto interface'
-import { GetCategoryDtoInterface } from './dto/get/get.category.dto interface'
+import { Inject, Injectable } from '@nestjs/common'
 import { plainToClass } from 'class-transformer'
+
+import { Id } from '../../infrastructure/domain/entities/id'
+import { Flusher } from '../../infrastructure/domain/flusher'
+import { CategoryServiceInterface } from './category.service.interface'
+import { CategoryEntity } from './domain/entities/category.entity'
+import { CategoryRepositoryInterface } from './domain/repositories/category.repository.interface'
+import { CreateCategoryDtoInterface } from './dto/create/create.category.dto interface'
+import { GetCategoryDtoInterface } from './dto/get/get.category.dto interface'
+import { RemoveCategoryDtoInterface } from './dto/remove/remove.category.dto interface'
 import { GetCategoryTransformer } from './response/transformers/get.category'
+import { GetCategoryTransformerInterface } from './response/transformers/get.category.interface'
 
 @Injectable()
 export class CategoryService implements CategoryServiceInterface {

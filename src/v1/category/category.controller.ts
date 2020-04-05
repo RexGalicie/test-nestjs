@@ -1,26 +1,27 @@
 import {
-  Controller,
-  Post,
   Body,
+  Controller,
   Delete,
-  Param,
   Get,
-  Patch,
   Inject,
+  Param,
+  Patch,
+  Post,
 } from '@nestjs/common'
 import {
-  ApiTags,
-  ApiResponse,
-  ApiCreatedResponse,
   ApiBearerAuth,
+  ApiCreatedResponse,
   ApiForbiddenResponse,
   ApiNotFoundResponse,
+  ApiResponse,
+  ApiTags,
 } from '@nestjs/swagger'
-import { CreateCategoryDto } from './dto/create/create.category.dto'
-import { RemoveCategoryDto } from './dto/remove/remove.category.dto'
-import { GetCategoryDto } from './dto/get/get.category.dto'
-import { GetCategoryTransformer } from './response/transformers/get.category'
+
 import { CategoryServiceInterface } from './category.service.interface'
+import { CreateCategoryDto } from './dto/create/create.category.dto'
+import { GetCategoryDto } from './dto/get/get.category.dto'
+import { RemoveCategoryDto } from './dto/remove/remove.category.dto'
+import { GetCategoryTransformer } from './response/transformers/get.category'
 import { GetCategoryTransformerInterface } from './response/transformers/get.category.interface'
 
 @ApiBearerAuth()

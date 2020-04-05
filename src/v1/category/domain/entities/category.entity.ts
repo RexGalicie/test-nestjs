@@ -1,8 +1,9 @@
-import { Property, Entity, AnyEntity, wrap } from 'mikro-orm'
-import { CategoryInterface } from './category.entity.interface'
-import { IdInterface } from '../../../../infrastructure/entities/id.interface'
-import { BaseEntity } from '../../../../infrastructure/entities/base.entity'
 import { ConflictException } from '@nestjs/common'
+import { AnyEntity, Entity, Property } from 'mikro-orm'
+
+import { BaseEntity } from '../../../../infrastructure/domain/entities/base.entity'
+import { IdInterface } from '../../../../infrastructure/domain/entities/id.interface'
+import { CategoryInterface } from './category.entity.interface'
 
 @Entity({ tableName: 'category' })
 export class CategoryEntity extends BaseEntity

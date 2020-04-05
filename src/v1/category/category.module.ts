@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common'
 import { MikroOrmModule } from 'nestjs-mikro-orm'
-import { CategoryController } from './category.controller'
+
 import { Flusher } from '../../infrastructure/domain/flusher'
+import { CategoryController } from './category.controller'
+import { CategoryService } from './category.service'
 import { CategoryEntity } from './domain/entities/category.entity'
 import { CategoryRepository } from './domain/repositories/category.repository'
-import { CategoryService } from './category.service'
 
 @Module({
   providers: [

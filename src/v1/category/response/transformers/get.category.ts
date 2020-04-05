@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { Expose } from 'class-transformer'
+
 import { GetCategoryTransformerInterface } from './get.category.interface'
 
 export class GetCategoryTransformer implements GetCategoryTransformerInterface {

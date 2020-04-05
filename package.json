@@ -12,7 +12,7 @@
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
-    "lint": "tslint 'src/**/*.ts'",
+    "lint": "tslint 'src/**/*.ts' -p ./tsconfig.json -c ./tslint.json --fix",
     "test": "jest",
     "test:watch": "jest --watchAll",
     "test:cov": "jest --coverage",
@@ -58,8 +58,10 @@
     "eslint": "6.8.0",
     "eslint-config-prettier": "6.10.1",
     "eslint-plugin-import": "2.20.2",
+    "import-sort-style-module": "^6.0.0",
     "jest": "25.2.3",
     "prettier": "2.0.2",
+    "prettier-plugin-import-sort": "^0.0.4",
     "supertest": "4.0.2",
     "ts-jest": "^25.3.1",
     "ts-loader": "6.2.2",
@@ -68,6 +70,12 @@
     "tslint": "^6.1.1",
     "tslint-react": "^4.2.0",
     "typescript": "3.7.2"
+  },
+  "importSort": {
+    ".js, .ts,": {
+      "style": "module",
+      "parser": "typescript"
+    }
   },
   "mikro-orm": {
     "useTsNode": true,

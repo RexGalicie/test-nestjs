@@ -1,12 +1,13 @@
-import { EventEntityInterface } from './../contracts/event.entity.interface'
 import { Injectable, NotImplementedException } from '@nestjs/common'
 import { EntityManager } from 'mikro-orm'
+
+import { EventEntityInterface } from './../contracts/event.entity.interface'
 
 @Injectable()
 export class Flusher {
   constructor(private readonly em: EntityManager) {}
 
-  private dispatch(params: []) {
+  private dispatch(_params: []) {
     throw new NotImplementedException(
       'Not emplimented! Move to other service use DI'
     )

@@ -1,4 +1,4 @@
-import { IdInterface } from './../../../../infrastructure/entities/id.interface'
+import { IdInterface } from '../../../../infrastructure/domain/entities/id.interface'
 import { CategoryInterface } from '../entities/category.entity.interface'
 
 export interface CategoryRepositoryInterface {

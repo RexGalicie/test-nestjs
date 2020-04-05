@@ -1,4 +1,4 @@
-import { BaseEntityInterface } from './../../../../infrastructure/entities/base.entity.interface'
+import { BaseEntityInterface } from '../../../../infrastructure/domain/entities/base.entity.interface'
 
 export interface CategoryInterface extends BaseEntityInterface {
   uuid: string

@@ -1,10 +1,10 @@
-import { IdInterface } from './../../../../infrastructure/entities/id.interface'
-import { EntityManager } from 'mikro-orm'
 import { Injectable, NotFoundException } from '@nestjs/common'
+import { EntityManager } from 'mikro-orm'
 
+import { IdInterface } from '../../../../infrastructure/domain/entities/id.interface'
 import { CategoryInterface } from './../entities/category.entity.interface'
-import { CategoryRepositoryInterface } from './category.repository.interface'
 import { CategoryEntity } from '../entities/category.entity'
+import { CategoryRepositoryInterface } from './category.repository.interface'
 
 @Injectable()
 export class CategoryRepository implements CategoryRepositoryInterface {
