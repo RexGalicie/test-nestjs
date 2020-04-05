@@ -3087,7 +3087,7 @@ fastify-swagger@^2.5.0:
     fastify-static "^2.5.1"
     js-yaml "^3.12.1"
 
-fastify@2.13.0:
+fastify@2.13.0, fastify@^2.13.0:
   version "2.13.0"
   resolved "https://registry.yarnpkg.com/fastify/-/fastify-2.13.0.tgz#236906311122e38c45c6610cbd09b8818471d9cf"
   integrity sha512-iAFPs1qsYRaVdoAVFqC2Q6BmPsfaUZBnW6Icupjt/eVKD4SolSkg4aAlWJlZl3Nh3MLpCc6O+y3Apg/LVQ5PoA==

@@ -15,8 +15,12 @@ import {
   ApiNotFoundResponse,
   ApiResponse,
   ApiTags,
+  getSchemaPath,
 } from '@nestjs/swagger'
+import { MetaDataTransformExtra } from 'src/infrastructure/transformers/metadata.transform'
 
+import { ForbidenResopnseSchema } from './../../documentation/responses/forbiden.responce.schema';
+import { NotFoundResopnseSchema } from './../../documentation/responses/notfound.responce.schema';
 import { CategoryServiceInterface } from './category.service.interface'
 import { CreateCategoryDto } from './dto/create/create.category.dto'
 import { GetCategoryDto } from './dto/get/get.category.dto'
@@ -39,30 +43,73 @@ export class CategoryController {
   @ApiCreatedResponse({
     description: 'The record has been successfully created.',
   })
-  @ApiForbiddenResponse({ description: 'Forbidden.' })
+  @ApiForbiddenResponse({
+    schema: ForbidenResopnseSchema,
+    description: 'Forbidden.'
+  })
   @Post()
   async create(@Body() createCategoryDto: CreateCategoryDto): Promise<void> {
     return this.service.saveCategory(createCategoryDto)
   }
 
   @ApiResponse({
+    schema: {
+      type: 'object',
+      properties: {
+        _meta: { $ref: getSchemaPath(MetaDataTransformExtra) },
+        status: {
+          default: 'success',
+          description: 'response status',
+          type: 'string'
+        },
+        data: {
+          type: 'array',
+          items: {
+            type: 'object',
+            oneOf: [
+              { $ref: getSchemaPath(GetCategoryTransformer) }
+            ]
+          }
+        }
+      }
+    },
     status: 200,
     description: 'The records found.',
-    type: GetCategoryTransformer,
+    isArray: true
   })
-  @ApiForbiddenResponse({ description: 'Forbidden.' })
+  @ApiForbiddenResponse({
+    schema: ForbidenResopnseSchema,
+    description: 'Forbidden.'
+  })
   @Get('')
   async findAll(): Promise<GetCategoryTransformerInterface[]> {
     return this.service.findAll()
   }
 
   @ApiResponse({
+    schema: {
+      type: 'object',
+      properties: {
+        _meta: { $ref: getSchemaPath(MetaDataTransformExtra) },
+        status: {
+          default: 'success',
+          description: 'response status',
+          type: 'string'
+        },
+        data: { $ref: getSchemaPath(GetCategoryTransformer) },
+      }
+    },
     status: 200,
-    description: 'The record found',
-    type: GetCategoryTransformer,
+    description: 'The record found'
   })
-  @ApiForbiddenResponse({ description: 'Forbidden.' })
-  @ApiNotFoundResponse({ description: 'Category not found' })
+  @ApiForbiddenResponse({
+    schema: ForbidenResopnseSchema,
+    description: 'Forbidden.'
+  })
+  @ApiNotFoundResponse({
+    schema: NotFoundResopnseSchema,
+    description: 'Category not found'
+  })
   @Get('/:id')
   async get(
     @Param() getCategoryDto: GetCategoryDto
@@ -71,12 +118,29 @@ export class CategoryController {
   }
 
   @ApiResponse({
+    schema: {
+      type: 'object',
+      properties: {
+        _meta: { $ref: getSchemaPath(MetaDataTransformExtra) },
+        status: {
+          default: 'success',
+          description: 'response status',
+          type: 'string'
+        },
+        data: { $ref: getSchemaPath(GetCategoryTransformer) },
+      }
+    },
     status: 200,
-    description: 'Return updated category',
-    type: GetCategoryTransformer,
+    description: 'Return updated category'
   })
-  @ApiForbiddenResponse({ description: 'Forbidden.' })
-  @ApiNotFoundResponse({ description: 'Category not found' })
+  @ApiForbiddenResponse({
+    schema: ForbidenResopnseSchema,
+    description: 'Forbidden.'
+  })
+  @ApiNotFoundResponse({
+    schema: NotFoundResopnseSchema,
+    description: 'Category not found'
+  })
   @Patch('/:id/deactivate')
   async deactivate(
     @Param() getCategoryDto: GetCategoryDto
@@ -85,12 +149,29 @@ export class CategoryController {
   }
 
   @ApiResponse({
+    schema: {
+      type: 'object',
+      properties: {
+        _meta: { $ref: getSchemaPath(MetaDataTransformExtra) },
+        status: {
+          default: 'success',
+          description: 'response status',
+          type: 'string'
+        },
+        data: { $ref: getSchemaPath(GetCategoryTransformer) },
+      }
+    },
     status: 200,
-    description: 'Return updated category',
-    type: GetCategoryTransformer,
+    description: 'Return updated category'
   })
-  @ApiForbiddenResponse({ description: 'Forbidden.' })
-  @ApiNotFoundResponse({ description: 'Category not found' })
+  @ApiForbiddenResponse({
+    schema: ForbidenResopnseSchema,
+    description: 'Forbidden.'
+  })
+  @ApiNotFoundResponse({
+    schema: NotFoundResopnseSchema,
+    description: 'Category not found'
+  })
   @Patch('/:id/activate')
   async activate(
     @Param() getCategoryDto: GetCategoryDto
@@ -99,11 +180,28 @@ export class CategoryController {
   }
 
   @ApiResponse({
+    schema: {
+      type: 'object',
+      properties: {
+        _meta: { $ref: getSchemaPath(MetaDataTransformExtra) },
+        status: {
+          default: 'success',
+          description: 'response status',
+          type: 'string'
+        },
+      }
+    },
     status: 204,
     description: 'The record has been successfully deleted.',
   })
-  @ApiForbiddenResponse({ description: 'Forbidden.' })
-  @ApiNotFoundResponse({ description: 'Category not found' })
+  @ApiForbiddenResponse({
+    schema: ForbidenResopnseSchema,
+    description: 'Forbidden.'
+  })
+  @ApiNotFoundResponse({
+    schema: NotFoundResopnseSchema,
+    description: 'Category not found'
+  })
   @Delete('/:id')
   async delete(@Param() deleteCategoryDto: RemoveCategoryDto): Promise<void> {
     return this.service.deleteCategory(deleteCategoryDto)

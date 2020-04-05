@@ -1,4 +1,6 @@
 import { ConflictException } from '@nestjs/common'
+import { ApiProperty } from '@nestjs/swagger'
+import { Expose } from 'class-transformer'
 import { AnyEntity, Entity, Property } from 'mikro-orm'
 
 import { BaseEntity } from '../../../../infrastructure/domain/entities/base.entity'
@@ -8,14 +10,18 @@ import { CategoryInterface } from './category.entity.interface'
 @Entity({ tableName: 'category' })
 export class CategoryEntity extends BaseEntity
   implements AnyEntity<CategoryEntity>, CategoryInterface {
-  [x: string]: any
-
+  @ApiProperty()
+  @Expose()
   @Property()
   title: string
 
+  @ApiProperty()
+  @Expose()
   @Property()
   active: boolean
 
+  @ApiProperty()
+  @Expose()
   @Property({ default: false })
   softDeleted = false
 
