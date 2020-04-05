@@ -13,7 +13,6 @@ import { FastifyRequest } from 'fastify';
 import { v4 } from 'uuid';
 
 import { AppModule } from './app.module'
-import { testMiddleware } from './infrastructure/middlewares/test.middleware'
 import { MetaDataTransformExtra } from './infrastructure/transformers/metadata.transform';
 import { GetCategoryTransformer } from './v1/category/response/transformers/get.category';
 import { PingSuccessTransformer } from './v1/ping/response/transformers/ping.succes';
@@ -28,7 +27,6 @@ async function bootstrap() {
       modifyCoreObjects: true
     })
   )
-  app.use(testMiddleware);
   const globalPrefix = 'api'
   app.setGlobalPrefix(globalPrefix)
   app.useGlobalPipes(
@@ -58,6 +56,7 @@ async function bootstrap() {
   })
   SwaggerModule.setup('api/v1', app, document)
   await app.listen(port, '0.0.0.0')
+  // tslint:disable-next-line: no-console
   console.log('Listening at http://localhost:' + port + '/' + globalPrefix)
 }
 
