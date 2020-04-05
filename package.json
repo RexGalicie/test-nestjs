@@ -7,7 +7,7 @@
     "prebuild": "rimraf dist",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"tests/**/*.ts\"",
-    "preprod": "yarn migration:up",
+    "preprod": "mikro-orm schema:create -r --fk-checks=true",
     "prod": "node dist/src/main",
     "start": "nest start",
     "start:dev": "nest start --watch",
